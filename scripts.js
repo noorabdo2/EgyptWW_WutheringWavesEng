@@ -1,7 +1,17 @@
 const coupons = {
-  Crook: { name: "tzc", discountPercentage: 50 },
-  SAVE20: { name: "SALE50", discountPercentage: 50 },
+  tzc: { name: "tzc", discountPercentage: 50 },
+  SALE50: { name: "SALE50", discountPercentage: 50 },
 };
+
+function showCouponPopup() {
+  document.getElementById("coupon-popup").style.display = "flex";
+  document.getElementById("overlay").style.display = "block";
+}
+
+function hideCouponPopup() {
+  document.getElementById("coupon-popup").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   const navToggle = document.getElementById("nav-toggle");
@@ -68,27 +78,16 @@ function applyCoupon() {
               <span class="old-price">${priceEGP}</span>
               <span class="discounted-price">${newPriceEGP.toFixed(
                 2
-              )} جنية / ${newPriceUSD.toFixed(2)}$</span>
+              )} EGP / ${newPriceUSD.toFixed(2)}$</span>
           `;
 
       // Wrap card container with discount wrapper
       cardContainer.parentNode.insertBefore(discountWrapper, cardContainer);
       discountWrapper.appendChild(discountBadge);
       discountWrapper.appendChild(cardContainer);
+      hideCouponPopup();
     });
-
-    hideCouponPopup();
   } else {
     alert("Invalid coupon code.");
   }
-}
-
-function showCouponPopup() {
-  document.getElementById("coupon-popup").style.display = "flex";
-  document.getElementById("overlay").style.display = "block";
-}
-
-function hideCouponPopup() {
-  document.getElementById("coupon-popup").style.display = "none";
-  document.getElementById("overlay").style.display = "none";
 }
